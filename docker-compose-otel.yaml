@@ -82,6 +82,7 @@ services:
       - com.datadoghq.tags.service=calendar-producer-java-otel-api-dd
       - com.datadoghq.tags.version=1.0-beta
 
+
   calendar-consumer-go-otel:
     depends_on:
       kafka-otel:
@@ -125,6 +126,7 @@ services:
       - /proc/:/host/proc/:ro
       - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
       - /sys/kernel/debug:/sys/kernel/debug
+
     cap_add:
       - SYS_ADMIN
       - SYS_RESOURCE

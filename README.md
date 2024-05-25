@@ -22,42 +22,25 @@ All Datadog ddtrace libraries implement the OTel API. This means that if you've 
 As well as all of the configuration options available in ddtrace, allowing you to build your application using vendor-neutral APIs while reaping the benefits of signals and functionality not yet available in OpenTelemetry.
 
 
-### But how do it know?
+### But how do it know? 🤔
 
 OpenTelemetry is just [another integration included with ddtrace](https://github.com/DataDog/dd-trace-java/tree/master/dd-java-agent/instrumentation/opentelemetry). When you set `DD_OTEL_ENABLED` a [TracerProvider](https://opentelemetry.io/docs/concepts/signals/traces/#tracer-provider) is created. Then the OTel <> ddtrace interop happens: the tracer uses the ddtrace API's [SpanBuilder](https://github.com/DataDog/dd-trace-java/blob/master/internal-api/src/main/java/datadog/trace/bootstrap/instrumentation/api/AgentTracer.java#L296) to create spans, but instead of using the Datadog default conventions it [follows OpenTelemetry conventions](https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/opentelemetry/opentelemetry-1.4/src/main/java/datadog/trace/instrumentation/opentelemetry14/trace/OtelTracer.java#L23-#L24)
 
 ## Running the app
 
-### Docker Compose
 
-Retrieve API_KEY from datadoghq, and expose same on Shell
+* [Retrieve API_KEY from datadoghq](https://app.datadoghq.com/organization-settings/api-keys), and expose same on Shell
 
 ```
 export DD_API_KEY=xx
 
 ```
-Bring up the services
+* `chmod +x run.sh stop.sh`
+* `./run.sh
 
-```
-docker compose -f docker-compose-otel.yaml up
-```
+After about one minute your browser will be opened to the Service page where you can review the telemetry from the producer service.
 
-### Create ASM Threat Scenario
-
-Simulate an attacker scanning for vulnerabilities by creating and running a shell script:
-
-```
-for ((i=1;i<=200;i++)); do
-# Target existing service’s routes
-curl localhost:9090/calendar -A 'dd-test-scanner-log';
-# Target non existing service’s routes
-curl localhost:9090/calendarss -A 'dd-test-scanner-log';
-done
-
-```
-
-
-
+Stop the sandbox with `./stop.sh`
 
 
 
