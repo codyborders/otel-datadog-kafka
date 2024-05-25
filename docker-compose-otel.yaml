@@ -62,6 +62,7 @@ services:
       - SERVER_PORT=9090
       - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=otelapi-with-dd-kafka,host.name=otelcol-docker
       - DD_IAST_ENABLED=true
+      - DD_APPSEC_ENABLED=true
       - DD_PROFILING_ENABLED=true
       - DD_PROFILING_DDPROF_ENABLED=true
       - DD_PROFILING_DDPROF_CPU_ENABLED=true
