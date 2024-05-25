@@ -28,19 +28,32 @@ OpenTelemetry is just [another integration included with ddtrace](https://github
 
 ## Running the app
 
+### Prepare ~/sandbox.docker.env file
 
-* [Retrieve API_KEY from datadoghq](https://app.datadoghq.com/organization-settings/api-keys), and expose same on Shell
-
-```
-export DD_API_KEY=xx
+If you haven't already, you'll need to [retrieve an API from from your Datadog account](https://app.datadoghq.com/organization-settings/api-keys), then add the following to `~/sandbox.docker.env`:
 
 ```
-* `chmod +x run.sh stop.sh`
-* `./run.sh
+DD_API_KEY=<Your API Key>
+```
 
-After about one minute your browser will be opened to the Service page where you can review the telemetry from the producer service.
 
-Stop the sandbox with `./stop.sh`
+### Prepare start/stop scripts
+
+```
+chmod +x run.sh stop.sh
+```
+
+### Start the sandbox
+```
+`./run.sh`
+```
+
+After about one minute your browser will be opened to the Traces search page, and shortly thereafter you should begin to see spans from your services flowing in real-time.
+
+### Stop the sandbox 
+```
+`./stop.sh`
+```
 
 
 
